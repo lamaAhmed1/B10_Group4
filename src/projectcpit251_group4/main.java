@@ -54,7 +54,7 @@ public class main {
         }
         
         
-        String i = null;
+        String selection = null;
         
         do{
              switch(x){
@@ -68,13 +68,13 @@ public class main {
                                       + "\no to exit"
                                       + "\n-----------------------------------------------");
                       
-                     i=input.next();
+                     selection=input.next();
                      
-                     if(i.charAt(0)=='1'){
+                     if(selection.charAt(0)=='1'){
                          main.printAllProduct();
                      }
                      
-                      else if(i.charAt(0)=='2'){
+                      else if(selection.charAt(0)=='2'){
                        
                           String ex=null;
                           
@@ -115,13 +115,13 @@ public class main {
                          
                      }
                     
-                     else if(i.charAt(0)=='3'){
+                     else if(selection.charAt(0)=='3'){
                          System.out.println("Enter type of product: acrylics, oils, watercolors, pastels");
                          String type=input.next();
                          
                          main.searchProduct(type);
                      }
-                     else if(i.charAt(0)=='4'){
+                     else if(selection.charAt(0)=='4'){
                           main.printCart();
                            if(!main.cartList.isEmpty()){
                          
@@ -177,11 +177,11 @@ public class main {
                                
                                   + "\n0 exit"
                                   + "\n--------------------------------------------");
-                     i=input.next();
-                     if(i.charAt(0)=='1'){
+                     selection=input.next();
+                     if(selection.charAt(0)=='1'){
                          main.printAllProduct();
                      }
-                     else if(i.charAt(0)=='2'){
+                     else if(selection.charAt(0)=='2'){
                          System.out.println("Enter product details:");
                          System.out.println("enter the type:");
                          String type=input.next();
@@ -204,7 +204,7 @@ public class main {
              
             
          System.out.println("\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\");   
-        }while(!(i.charAt(0)=='0'));
+        }while(!(selection.charAt(0)=='0'));
         
         
         System.out.println("------------------------ Thank you ------------------------");
