@@ -157,8 +157,33 @@ public class main {
                 
                 
                 case "2":{
-                
-                }
+                 System.out.println("-----------------Artist menue----------------"
+                                  + "\n1 for view product"
+                                  + "\n2 to add new item"
+                               
+                                  + "\n0 exit"
+                                  + "\n--------------------------------------------");
+                     i=input.next();
+                     if(i.charAt(0)=='1'){
+                         main.printAllProduct();
+                     }
+                     else if(i.charAt(0)=='2'){
+                         System.out.println("Enter product details:");
+                         System.out.println("enter the type:");
+                         String type=input.next();
+                         System.out.println("enter the price:");
+                         double price=input.nextDouble();
+                         System.out.println("enter your id:");
+                         String id=input.next();
+                         Artist art=new Artist(id);
+                         
+                         Product prod4=new Product(art.getId(),price,type);
+                         System.out.println("product with id "+main.addItem(prod4)+" added");
+                         
+                         System.out.println("items after add:");
+                         main.printAllProduct();
+                         
+                     }
             
             
              
@@ -174,8 +199,12 @@ public class main {
         
         
         }
-        }
-     public String addToCart(String item, double price){
+        
+     
+         
+
+   /////////////////////////////////////////////////////////////////////////
+        public String addToCart(String item, double price){
        
         cart1=new Cart(item, true,0.0);
         cartList.add(cart1);
@@ -185,7 +214,7 @@ public class main {
               return cart1.getType()+" added";
     }
     
-    
+    /////////////////////////////////////////////////////////////////////////////////
      public void printCart(){
          int quan=0;
          
@@ -199,27 +228,21 @@ public class main {
          System.out.println("------------------------------------");
          
     }
-    
-     public void printAllProduct(){
+    ///////////////////////////////////////////////////////////////////////////////////////
+    public void printAllProduct(){
          
         for(Product s:productList){
+
             System.out.println(""+s.prodInfo());
         }
         
     }
-     
-    
-    public static void showMenue(){
-        System.out.println("****************************************************************************"
-                         + "\n****************************************************************************"
-                         + "\n                       Welcome to Artsy application                         "
-                         + "\n****************************************************************************"
-                         + "\n****************************************************************************"
-                         + "\n"
-                + "\npress (1) if you are a customer"
-                + "\npress (2) if you are an artist");
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    public String addItem(Product prod){
+        productList.add(prod);
+        return prod.getId();
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
      public String searchProduct(String type){
         
          for(Product s:productList){
@@ -258,6 +281,29 @@ public class main {
         }
     }
        //////////////////////////////////////////////////////////////////////////////////
+       public void deleteProduct(String t){
+        
+        for(Product s:productList){
+            if(s.getId().equals(t)){
+               productList.remove(s);
+                
+            }
+        }
+    }
+     
+     //////////////////////////////////////////menue method/////////////////////////////////////////////////////////
+       public static void showMenue(){
+        System.out.println("****************************************************************************"
+                         + "\n****************************************************************************"
+                         + "\n                       Welcome to Artsy application                         "
+                         + "\n****************************************************************************"
+                         + "\n****************************************************************************"
+                         + "\n"
+                + "\npress (1) if you are a customer"
+                + "\npress (2) if you are an artist");
+    }
        
-    
 }
+
+    
+
