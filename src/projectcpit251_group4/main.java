@@ -112,18 +112,60 @@ public class main {
                          
                      }
                     
-                    
+                     else if(i.charAt(0)=='3'){
+                         System.out.println("Enter type of product: acrylics, oils, watercolors, pastels");
+                         String type=input.next();
+                         
+                        System.out.println( main.searchProduct(type)+",");
+                     }
+                     else if(i.charAt(0)=='4'){
+                          main.printCart();
+                           if(!main.cartList.isEmpty()){
+                         System.out.println("Please enter your name");
+                         String name=input.next();
+                         System.out.println("Please enter your phone number:");
+                         String phone=input.next();
+                         Customer cusinfo=new Customer(phone,name);
+                         main.cusList.add(cusinfo);
+                         System.out.println("Please enter your payment method (1) for cash (2) for credit:");
+                         String payment=input.next();
+                         String pay;
+                     
+                            if(payment.charAt(0)=='1'){
+                              pay="cash";
+                           }
+                               else{
+                             pay="credit";
+                           }
+                         order order1=new order(true,pay);
+                         main.orderList.add(order1);
+                        
+                         main.printcus();
+                         main.printorder();
+                         System.out.println("");
+                         System.out.println("----------The cart item-----------");
+                         main.printCart();
+                         System.out.println("****************************************************");
+                         }else 
+                             System.out.println("cart is empty please add items");
+                         
+                     }
+                      
+                    break;
                 }
+                    
+                
                 
                 case "2":{
                 
                 }
             
             
-             }
+             
             
          System.out.println("\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\");   
         }while(!(i.charAt(0)=='0'));
+        
         
         System.out.println("------------------------ Thank you ------------------------");
         System.out.println("\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\");
@@ -131,10 +173,8 @@ public class main {
         
         
         
-        
-    
         }
-    
+        }
      public String addToCart(String item, double price){
        
         cart1=new Cart(item, true,0.0);
@@ -179,5 +219,45 @@ public class main {
                 + "\npress (1) if you are a customer"
                 + "\npress (2) if you are an artist");
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     public String searchProduct(String type){
+        
+         for(Product s:productList){
+             if (s.getType().equals(type)){
+                return "information : "+ s.prodInfo();///////////////////////////////////////
+               
+             }
+         }
+         return null;
+    }
+     /////////////////////////////////////////////////////////////////////////////////////////////
+      public void placeOrder(String item){
+        
+        ord=new order(true,item);
+        orderList.add(ord);
+                                   
+    }
+      ////////////////////////////////////////////////////////////////////////////////////////
+       public void printcus(){
+         
+         for(Customer s:cusList){
+            System.out.println("***************Order information ******************"
+                    + "\n"
+                    + "\n "+s.customerInfo());
+            
+        }
+     }
+       /////////////////////////////////////////////////////////////////////////////////////////////
+       public void printorder(){
+         
+         for(order s:orderList){
+             System.out.println("");
+            System.out.println(" confirmation status:"+s.isConfirm()+""
+                    + "\n payment method: "+s.getPaymentMethod());
+             
+        }
+    }
+       //////////////////////////////////////////////////////////////////////////////////
+       
     
 }
