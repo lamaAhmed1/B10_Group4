@@ -52,10 +52,13 @@ public class main {
             System.out.println("wrong input try again");
             x=input.next();
         }
+        
+        
         String i = null;
         
         do{
              switch(x){
+                 ////////////////////////////////////customer menue\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                 case "1":{
                       System.out.println("----------------Customer menue-------------------"
                                       + "\n1 for view products"
@@ -105,7 +108,7 @@ public class main {
                          
                          main.printCart();
                         
-                         System.out.println("if you want exit cart enter 0");
+                         System.out.println("to exit cart press 0 or press any button");
                          ex=input.next();
                         }while(!(ex.charAt(0)=='0'));
                         
@@ -116,17 +119,21 @@ public class main {
                          System.out.println("Enter type of product: acrylics, oils, watercolors, pastels");
                          String type=input.next();
                          
-                        System.out.println( main.searchProduct(type)+",");
+                         main.searchProduct(type);
                      }
                      else if(i.charAt(0)=='4'){
                           main.printCart();
                            if(!main.cartList.isEmpty()){
+                         
+                         //customer information      
                          System.out.println("Please enter your name");
                          String name=input.next();
                          System.out.println("Please enter your phone number:");
                          String phone=input.next();
                          Customer cusinfo=new Customer(phone,name);
                          main.cusList.add(cusinfo);
+                        
+                         //payment method
                          System.out.println("Please enter your payment method (1) for cash (2) for credit:");
                          String payment=input.next();
                          String pay;
@@ -137,15 +144,22 @@ public class main {
                                else{
                              pay="credit";
                            }
-                         order order1=new order(true,pay);
-                         main.orderList.add(order1);
-                        
-                         main.printcus();
-                         main.printorder();
+                         
+                          //confirm the order  
+                            System.out.println("to confirm the order enter 1:");
+                             String confirm=input.next();
+                             if(confirm.charAt(0)=='1'){
+                                 main.placeOrder(pay);
+                          
+                          // order information       
+                              main.printcus();
+                              main.printorder();
+                         
                          System.out.println("");
                          System.out.println("----------The cart item-----------");
                          main.printCart();
                          System.out.println("****************************************************");
+                             }
                          }else 
                              System.out.println("cart is empty please add items");
                          
@@ -155,7 +169,7 @@ public class main {
                 }
                     
                 
-                
+    /////////////////////////////////////////////artist menue\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\            
                 case "2":{
                  System.out.println("-----------------Artist menue----------------"
                                   + "\n1 for view product"
@@ -184,7 +198,8 @@ public class main {
                          main.printAllProduct();
                          
                      }
-            
+                }
+             }
             
              
             
@@ -198,12 +213,13 @@ public class main {
         
         
         
-        }
+       
+    }
         
      
          
-
-   /////////////////////////////////////////////////////////////////////////
+        
+   /////////////////////////////////////////////////core//////////////////////////////////////////////////
         public String addToCart(String item, double price){
        
         cart1=new Cart(item, true,0.0);
@@ -214,8 +230,51 @@ public class main {
               return cart1.getType()+" added";
     }
     
-    /////////////////////////////////////////////////////////////////////////////////
-     public void printCart(){
+    
+    public String addItem(Product prod){
+        productList.add(prod);
+        return prod.getId();
+    }
+
+     public void searchProduct(String type){
+        
+         for(Product s:productList){
+             if (s.getType().equals(type)){
+                 System.out.println( "information : "+ s.prodInfo());
+               
+             }
+         }
+         
+    }
+     
+      public void placeOrder(String item){
+        
+        ord=new order(true,item);
+        orderList.add(ord);
+                                   
+    }
+      //////////////////////////////////////////////extra//////////////////////////////////////////
+       public void printcus(){
+         
+         for(Customer s:cusList){
+            System.out.println("***************Order information ******************"
+                    + "\n"
+                    + "\n "+s.customerInfo());
+            
+        }
+     }
+       /////////////////////////////////////////////////////////////////////////////////////////////
+       public void printorder(){
+         
+         for(order s:orderList){
+             System.out.println("");
+            System.out.println(" confirmation status:"+s.isConfirm()+""
+                    + "\n payment method: "+s.getPaymentMethod());
+             
+        }
+    }
+       
+         public void printCart(){
          int quan=0;
          
          for(Cart s:cartList){
@@ -236,59 +295,7 @@ public class main {
             System.out.println(""+s.prodInfo());
         }
         
-    }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-    public String addItem(Product prod){
-        productList.add(prod);
-        return prod.getId();
-    }
-////////////////////////////////////////////////////////////////////////////////////////////////
-     public String searchProduct(String type){
-        
-         for(Product s:productList){
-             if (s.getType().equals(type)){
-                return "information : "+ s.prodInfo();///////////////////////////////////////
-               
-             }
-         }
-         return null;
-    }
-     /////////////////////////////////////////////////////////////////////////////////////////////
-      public void placeOrder(String item){
-        
-        ord=new order(true,item);
-        orderList.add(ord);
-                                   
-    }
-      ////////////////////////////////////////////////////////////////////////////////////////
-       public void printcus(){
-         
-         for(Customer s:cusList){
-            System.out.println("***************Order information ******************"
-                    + "\n"
-                    + "\n "+s.customerInfo());
-            
-        }
-     }
-       /////////////////////////////////////////////////////////////////////////////////////////////
-       public void printorder(){
-         
-         for(order s:orderList){
-             System.out.println("");
-            System.out.println(" confirmation status:"+s.isConfirm()+""
-                    + "\n payment method: "+s.getPaymentMethod());
-             
-        }
-    }
-       //////////////////////////////////////////////////////////////////////////////////
-       public void deleteProduct(String t){
-        
-        for(Product s:productList){
-            if(s.getId().equals(t)){
-               productList.remove(s);
-                
-            }
-        }
+    
     }
      
      //////////////////////////////////////////menue method/////////////////////////////////////////////////////////
